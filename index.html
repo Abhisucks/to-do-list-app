@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <div class="card mt-3">
+                  <div class="card-header fw-semibold fs-4">My TO-DO List</div>
+                  <div class="card-body">
+                    <input type="text" class="form-control" id="inp" placeholder="Enter Your Task" required> <br>
+                    <input type="text" class="form-control" id="inp2" placeholder="Enter Your Task's Details " required> <br>
+                    <button type="button" class="btn btn-outline-primary" onclick="handleAddTodo()">Add </button>
+                  </div>
+                </div>
+                <div id="output"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <script>
+        let todos = []
+        function handleAddTodo() {
+            
+            let inp = document.querySelector("#inp")
+            let inp2 = document.querySelector("#inp2")
+            if (!inp.value || !inp2.value) {
+                alert("Input fields cannot be empty!");
+
+            } else {
+                todos.push({task : `${inp.value}`, dec: `${inp2.value}`})
+                handleDisplay()
+            }
+
+            inp.value = ""
+            inp2.value = ""
+    
+        }
+
+        function handleDelete(arg) {
+            todos.splice(arg, 1)
+            handleDisplay()
+             
+        }
+
+        function handleDisplay() {
+            let str =  `<h4 class="text-light mt-2">Total ${todos.length}</h4>`
+            if (todos.length > 0 ) {
+            for (let i = 0; i < todos.length; i++) {
+                str += `
+             <div class="alert alert-primary d-flex justify-content-between align-items-center">
+               <div>
+                <h4> ${todos[i].task} </h4>
+                <p> ${todos[i].dec} </p>
+                </div>
+              <button onclick="handleDelete(${i})" type="button" class="btn btn-outline-danger">Delete</button>
+             </div>`
+                
+             }
+            document.querySelector("#output").innerHTML = str
+  
+           } 
+           else {
+            document.querySelector("#output").innerHTML = `<h4>No Todos Found</h4>`
+           }
+        }
+
+    </script>
