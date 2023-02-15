@@ -1,0 +1,6 @@
+{
+    "name": "to-do List App",
+    "short_name": "to-do",
+    "start_url": "/to-do-list-app",
+    "display": "standalone"
+}
